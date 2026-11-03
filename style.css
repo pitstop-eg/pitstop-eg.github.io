@@ -28,9 +28,8 @@ gap: .5rem 1.5rem; padding-block: .9rem;
 .brand { display: inline-flex; }
 .brand img { display: block; height: 26px; width: auto; }
 .site-nav { display: flex; flex-wrap: wrap; gap: 0 1.25rem; }
-.site-nav a, .social a { color: var(--paper); text-decoration: none; }
-.site-nav a { font-weight: 600; }
-.lang-switch { color: var(--paper); text-decoration: none; font-weight: 600; font-size: .9rem; }
+.site-nav a, .social a, .lang-switch { color: var(--paper); text-decoration: none; }
+.site-nav a, .lang-switch { font-weight: 600; }
 .lang-switch:hover, .site-nav a:hover, .social a:hover { color: var(--yellow); }
 .site-header .btn { margin-inline-start: auto; }
 .site-header a:focus-visible { outline-color: var(--yellow); }
