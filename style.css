@@ -42,7 +42,7 @@ font-weight: 700; border-radius: 4px;
 }
 .btn:hover { background: var(--red-deep); }
 
-/* hero: the only place the racing-red/asphalt treatment lives */
+/* hero: the racing-red/asphalt treatment starts here */
 .hero { background: var(--asphalt); color: var(--paper); padding: 0; }
 .hero .wrap { padding-block: 5rem 4.5rem; }
 .hero h1 {
@@ -106,6 +106,27 @@ padding: 2rem 1.5rem;
 @media (min-width: 48rem) {
 .lane--lead .lane-services { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
 }
+
+/* pit stop: the four stations, numbered so the order reads without racing
+   knowledge; auto-fit keeps them stacked at 320px */
+.pit-lede { color: var(--track); max-width: 62ch; margin-bottom: 2rem; }
+.pit-stages {
+display: grid; gap: 1rem; list-style: none; padding: 0;
+counter-reset: stage;
+grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+.pit-stages li {
+background: #fff; border-top: 4px solid var(--red); border-radius: 4px;
+padding: 1.25rem 1.5rem 1.5rem; overflow-wrap: anywhere;
+counter-increment: stage;
+}
+.pit-stages li::before {
+content: counter(stage, decimal-leading-zero);
+display: block; font-weight: 700; font-size: .85rem;
+letter-spacing: .12em; color: var(--red);
+}
+.pit-stages h3 { font-size: 1.15rem; margin: .3rem 0 .5rem; }
+.pit-stages p { color: var(--track); font-size: .95rem; }
 
 .contact { text-align: center; padding-bottom: 4rem; }
 .contact p { color: var(--track); margin-bottom: .5rem; }
