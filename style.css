@@ -17,7 +17,7 @@ line-height: 1.8;
 }
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
 
-a:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 3px; }
 
 /* header */
 .site-header { background: var(--asphalt); color: var(--paper); }
@@ -163,6 +163,34 @@ color: var(--red-deep); direction: ltr; unicode-bidi: embed; overflow-wrap: anyw
 text-decoration: none;
 }
 .contact .mail:hover { text-decoration: underline; }
+
+/* the brief form is the primary action; the email below it is the secondary route */
+.brief-form {
+display: grid; gap: 1rem; text-align: start;
+max-width: 34rem; margin: 1.75rem auto;
+}
+@media (min-width: 48rem) { .brief-form { grid-template-columns: 1fr 1fr; } }
+.field { display: grid; gap: .35rem; }
+.field--wide { grid-column: 1 / -1; }
+.field label { font-size: .9rem; font-weight: 600; }
+.field input, .field select, .field textarea {
+font: inherit; width: 100%; padding: .5rem .7rem;
+color: var(--asphalt); background: #fff;
+border: 1px solid rgba(10, 15, 21, .35); border-radius: 4px;
+}
+.field textarea { resize: vertical; }
+.field :is(input, select, textarea):focus-visible { outline: 3px solid var(--red-deep); outline-offset: 1px; }
+.field input[type="email"] { direction: ltr; }
+.req { color: var(--red); }
+.opt { font-weight: 400; color: var(--track); }
+/* honeypot: in the DOM for bots, out of sight and out of the tab order for people */
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.form-status { margin-top: .25rem; font-weight: 600; }
+.form-status[data-state="success"] { color: var(--asphalt); }
+.form-status[data-state="error"] { color: var(--red-deep); }
+/* the email is the fallback route, so it only appears when sending failed */
+.form-status[data-state="success"] .form-status-mail { display: none; }
+.form-status-mail { color: inherit; margin-inline-start: .3em; direction: ltr; unicode-bidi: embed; overflow-wrap: anywhere; }
 
 /* footer */
 .site-footer { background: var(--asphalt); color: var(--paper); padding: 0 0 2rem; }

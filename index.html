@@ -142,12 +142,61 @@
     </div>
   </section>
 
-  <!-- Temporary route: ticket 07 replaces this with the brief form. -->
   <section class="contact" id="contact">
     <div class="wrap">
       <h2>عندك فكرة؟</h2>
-      <p>ابعتلنا على الإيميل وهنرد عليك في أقرب وقت.</p>
-      <a class="mail" href="mailto:pitstop.agency.eg@gmail.com">pitstop.agency.eg@gmail.com</a>
+      <p>قولّنا على مشروعك في كام سطر، وهنرد عليك في أقرب وقت.</p>
+      <form class="brief-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="1426ef8b-5331-443b-ba0a-645a32db1ad4">
+        <input type="hidden" name="subject" value="Brief جديد من موقع PitStop">
+        <input type="hidden" name="from_name" value="PitStop">
+        <label class="honeypot" aria-hidden="true">متسيبش الخانة دي فاضية
+          <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off">
+        </label>
+
+        <div class="field">
+          <label for="name">اسمك <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">إيميلك <span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="brand">اسم البراند <span class="req" aria-hidden="true">*</span></label>
+          <input id="brand" name="brand" type="text" autocomplete="organization" required>
+        </div>
+        <div class="field">
+          <label for="lane">المجال <span class="req" aria-hidden="true">*</span></label>
+          <select id="lane" name="lane" required>
+            <option value="مش متأكد لسه" data-other>مش متأكد لسه</option>
+            <option>ويب وسيستمز</option>
+            <option>ديزاين</option>
+            <option>إعلانات</option>
+            <option>فيديو</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">الميزانية <span class="opt">(اختياري)</span></label>
+          <input id="budget" name="budget" type="text" placeholder="مثال: 10,000 – 15,000 جنيه">
+        </div>
+        <div class="field field--wide">
+          <label for="message">رسالتك <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <p class="field--wide">
+          <button class="btn" type="submit">ابعت البرِيف</button>
+        </p>
+        <!-- Shown by form.js; without JS the form posts to Web3Forms and lands on its own page. -->
+        <p class="form-status field--wide" role="status" hidden
+           data-success="وصلنا برِيفك، وهنرد عليك قريب."
+           data-error="ماحصلش إرسال. ابعتلنا على الإيميل:">
+          <span class="form-status-text"></span>
+          <a class="form-status-mail" href="mailto:pitstop.agency.eg@gmail.com">pitstop.agency.eg@gmail.com</a>
+        </p>
+      </form>
+      <p>أو ابعتلنا إيميل مباشرة على <a class="mail" href="mailto:pitstop.agency.eg@gmail.com">pitstop.agency.eg@gmail.com</a></p>
     </div>
   </section>
 </main>
@@ -170,5 +219,6 @@
   </div>
 </footer>
 
+<script src="assets/form.js"></script>
 </body>
 </html>
