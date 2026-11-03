@@ -42,7 +42,7 @@ font-weight: 700; border-radius: 4px;
 }
 .btn:hover { background: var(--red-deep); }
 
-/* hero: the only place the racing-red/asphalt treatment and checkered motif live */
+/* hero: the only place the racing-red/asphalt treatment lives */
 .hero { background: var(--asphalt); color: var(--paper); padding: 0; }
 .hero .wrap { padding-block: 5rem 4.5rem; }
 .hero h1 {
@@ -68,7 +68,7 @@ color: var(--paper); opacity: .8; max-width: 46ch;
 .hero .quiet { color: var(--paper); font-size: .95rem; text-underline-offset: .2em; }
 .hero .quiet:hover { color: var(--yellow); }
 .hero a:focus-visible { outline-color: var(--yellow); }
-/* checkered finish line closing the hero; paper squares because the backdrop is asphalt */
+/* checkered finish line; paper squares because the backdrop is asphalt */
 .flag {
 height: 28px;
 background:
@@ -89,8 +89,8 @@ text-decoration: none;
 .contact .mail:hover { text-decoration: underline; }
 
 /* footer */
-.site-footer { background: var(--asphalt); color: var(--paper); padding: 2.5rem 0 2rem; }
-.site-footer .wrap { display: grid; justify-items: center; gap: 1rem; text-align: center; }
+.site-footer { background: var(--asphalt); color: var(--paper); padding: 0 0 2rem; }
+.site-footer .wrap { display: grid; justify-items: center; gap: 1rem; text-align: center; padding-top: 2.5rem; }
 .site-footer .brand img { height: 30px; }
 .site-footer .mail { color: var(--yellow); font-weight: 600; text-decoration: none; }
 .site-footer .mail:hover { text-decoration: underline; }
