@@ -1,0 +1,6 @@
+exclude:
+  - docs
+  - GLOSSARY.md
+  - AGENTS.md
+  - README.md
+  - .scratch
