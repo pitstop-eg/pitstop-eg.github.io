@@ -81,6 +81,32 @@ background:
 section { padding: 3.5rem 0; }
 h2 { font-size: 1.7rem; margin-bottom: 1.75rem; }
 
+/* lanes: the lead lane (Web & Systems, always first) takes the full row above
+   the rest, which is where its roughly-double weight comes from; a fifth lane
+   only needs copy, auto-fit wraps it */
+.lane-grid {
+display: grid; gap: 1rem;
+grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+.lane {
+background: #fff; border: 1px solid rgba(10, 15, 21, .2); border-radius: 4px;
+padding: 1.5rem; overflow-wrap: anywhere;
+}
+.lane h3 { font-size: 1.1rem; margin-bottom: .6rem; }
+.lane-services { list-style: none; padding: 0; color: var(--track); font-size: .95rem; }
+.lane-services li::before { content: "—"; margin-inline-end: .5rem; color: var(--red); }
+.lane--lead {
+grid-column: 1 / -1;
+background: var(--asphalt); border-color: var(--asphalt); color: var(--paper);
+padding: 2rem 1.5rem;
+}
+.lane--lead h3 { font-size: 1.5rem; }
+.lane--lead .lane-services { color: var(--paper); opacity: .85; }
+.lane--lead .lane-services li::before { color: var(--yellow); }
+@media (min-width: 48rem) {
+.lane--lead .lane-services { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+}
+
 .contact { text-align: center; padding-bottom: 4rem; }
 .contact p { color: var(--track); margin-bottom: .5rem; }
 .contact .mail {
