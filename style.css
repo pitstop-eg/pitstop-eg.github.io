@@ -81,13 +81,15 @@ background:
 section { padding: 3.5rem 0; }
 h2 { font-size: 1.7rem; margin-bottom: 1.75rem; }
 
-/* lanes: the lead lane (Web & Systems, always first) takes the full row above
-   the rest, which is where its roughly-double weight comes from; a fifth lane
-   only needs copy, auto-fit wraps it */
+/* lanes: all four carry equal weight, one card each. Stacked on phones, 2-up
+   from 48rem, 4-up from 64rem so no card is orphaned on its own row. A fifth
+   lane wraps as a pair and may want the 64rem step raised. */
 .lane-grid {
 display: grid; gap: 1rem;
-grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+grid-template-columns: 1fr;
 }
+@media (min-width: 48rem) { .lane-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .lane-grid { grid-template-columns: repeat(4, 1fr); } }
 .lane {
 background: #fff; border: 1px solid rgba(10, 15, 21, .2); border-radius: 4px;
 padding: 1.5rem; overflow-wrap: anywhere;
@@ -95,17 +97,6 @@ padding: 1.5rem; overflow-wrap: anywhere;
 .lane h3 { font-size: 1.1rem; margin-bottom: .6rem; }
 .lane-services { list-style: none; padding: 0; color: var(--track); font-size: .95rem; }
 .lane-services li::before { content: "—"; margin-inline-end: .5rem; color: var(--red); }
-.lane--lead {
-grid-column: 1 / -1;
-background: var(--asphalt); border-color: var(--asphalt); color: var(--paper);
-padding: 2rem 1.5rem;
-}
-.lane--lead h3 { font-size: 1.5rem; }
-.lane--lead .lane-services { color: var(--paper); opacity: .85; }
-.lane--lead .lane-services li::before { color: var(--yellow); }
-@media (min-width: 48rem) {
-.lane--lead .lane-services { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
-}
 
 /* pit stop: the four stations, numbered so the order reads without racing
    knowledge; auto-fit keeps them stacked at 320px */
