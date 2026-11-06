@@ -8,7 +8,7 @@
 }
 
 * { box-sizing: border-box; margin: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 body {
 font-family: "Cairo", Tahoma, Arial, sans-serif;
 background: var(--paper);
@@ -18,9 +18,13 @@ line-height: 1.8;
 .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
 
 a:focus-visible, button:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 3px; }
+::selection { background: var(--yellow); color: var(--asphalt); }
 
 /* header */
-.site-header { background: var(--asphalt); color: var(--paper); }
+.site-header {
+position: sticky; top: 0; z-index: 10;
+background: var(--asphalt); color: var(--paper);
+}
 .site-header .wrap {
 display: flex; flex-wrap: wrap; align-items: center;
 gap: .5rem 1.5rem; padding-block: .9rem;
@@ -38,7 +42,7 @@ gap: .5rem 1.5rem; padding-block: .9rem;
 .btn {
 display: inline-block; padding: .5rem 1.4rem;
 background: var(--red); color: #fff; text-decoration: none;
-font-weight: 700; border-radius: 4px;
+font: inherit; font-weight: 700; border: 0; border-radius: 4px; cursor: pointer;
 }
 .btn:hover { background: var(--red-deep); }
 
@@ -79,106 +83,202 @@ background:
 }
 
 section { padding: 3.5rem 0; }
-h2 { font-size: 1.7rem; margin-bottom: 1.75rem; }
+/* one family, three roles: section head at 2.6rem, subhead at 1.2rem, body
+   at 1rem. Supporting copy is set by tone, not by shrinking below 1rem. */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+h2 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.25; margin-bottom: 2.25rem; }
+h3 { font-size: 1.2rem; line-height: 1.3; }
 
-/* lanes: all four carry equal weight, one card each. Stacked on phones, 2-up
-   from 48rem, 4-up from 64rem so no card is orphaned on its own row. A fifth
-   lane wraps as a pair and may want the 64rem step raised. */
-.lane-grid {
-display: grid; gap: 1rem;
+/* lanes: the four lanes read as one horizontal board — lane number, title, and
+   its services on a single line. All four carry equal weight; nothing is boxed.
+   The cap is a short red stub at rest that runs the full row on hover. */
+.lane-grid { counter-reset: lane; }
+.lane {
+position: relative;
+display: grid;
+grid-template-columns: auto 1fr;
+grid-template-areas: "num title" "num services";
+align-items: baseline; gap: .15rem 1.5rem;
+border-bottom: 1px solid rgba(10, 15, 21, .18);
+padding: 1.4rem 0 1.5rem;
+counter-increment: lane;
+overflow-wrap: anywhere;
+transition: opacity .25s ease;
+}
+.lane::before {
+content: ""; position: absolute; inset-block-start: 0; inset-inline: 0;
+height: 3px; background: var(--red);
+transform: scaleX(.35);
+transform-origin: 0 50%;
+transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+}
+.lane:dir(rtl)::before,
+html[dir="rtl"] .lane::before { transform-origin: 100% 50%; }
+.lane:hover::before,
+.lane:focus-within::before { transform: scaleX(1); }
+/* the hovered lane is the only one at full strength, so the row reads as one
+   lane in focus instead of four equal bars */
+@media (hover: hover) {
+.lane-grid:hover .lane:not(:hover) { opacity: .5; }
+}
+.lane-grid:has(.lane:focus-within) .lane:not(:focus-within) { opacity: .5; }
+.lane h3 {
+grid-area: title;
+font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+margin: 0; letter-spacing: -.015em;
+}
+.lane-services {
+grid-area: services;
+list-style: none; padding: 0;
+display: flex; flex-wrap: wrap; gap: .1rem 1.4rem;
+color: var(--track); font-size: 1rem;
+}
+.lane-services li::before { content: "—"; margin-inline-end: .5rem; color: var(--red); }
+.lane::after {
+content: counter(lane, decimal-leading-zero);
+grid-area: num;
+align-self: start; padding-top: .55rem;
+font-weight: 700; font-size: .85rem; letter-spacing: .12em;
+color: var(--red);
+}
+@media (min-width: 48rem) {
+.lane {
+grid-template-columns: auto minmax(0, 18rem) 1fr;
+grid-template-areas: "num title services";
+align-items: center;
+}
+}
+@media (prefers-reduced-motion: reduce) {
+.lane, .lane::before { transition: none; }
+}
+
+/* pit stop: the one section that plays the metaphor literally, so it takes the
+   asphalt surface. Four numbered stations read as a sequence; the number is the
+   loudest element and the rules stop the columns from becoming cards again. */
+.pit-stop { background: var(--asphalt); color: var(--paper); padding: 4.5rem 0; }
+.pit-lede { color: var(--paper); opacity: .8; max-width: 60ch; margin-bottom: 2.5rem; }
+.pit-stages {
+display: grid; gap: 2.25rem 2.5rem; list-style: none; padding: 0;
+counter-reset: stage;
 grid-template-columns: 1fr;
 }
-@media (min-width: 48rem) { .lane-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 64rem) { .lane-grid { grid-template-columns: repeat(4, 1fr); } }
-.lane {
-background: #fff; border: 1px solid rgba(10, 15, 21, .2); border-radius: 4px;
-padding: 1.5rem; overflow-wrap: anywhere;
-}
-.lane h3 { font-size: 1.1rem; margin-bottom: .6rem; }
-.lane-services { list-style: none; padding: 0; color: var(--track); font-size: .95rem; }
-.lane-services li::before { content: "—"; margin-inline-end: .5rem; color: var(--red); }
-
-/* pit stop: the four stations, numbered so the order reads without racing
-   knowledge; auto-fit keeps them stacked at 320px */
-.pit-lede { color: var(--track); max-width: 62ch; margin-bottom: 2rem; }
-.pit-stages {
-display: grid; gap: 1rem; list-style: none; padding: 0;
-counter-reset: stage;
-grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-}
+@media (min-width: 48rem) { .pit-stages { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 64rem) { .pit-stages { grid-template-columns: repeat(4, 1fr); } }
 .pit-stages li {
-background: #fff; border-top: 4px solid var(--red); border-radius: 4px;
-padding: 1.25rem 1.5rem 1.5rem; overflow-wrap: anywhere;
+border-top: 1px solid rgba(241, 238, 235, .3);
+padding-top: 1.25rem; overflow-wrap: anywhere;
 counter-increment: stage;
 }
 .pit-stages li::before {
 content: counter(stage, decimal-leading-zero);
-display: block; font-weight: 700; font-size: .85rem;
-letter-spacing: .12em; color: var(--red);
+display: block; font-weight: 700; font-size: 2.1rem; line-height: 1;
+letter-spacing: .02em; color: var(--red); margin-bottom: .6rem;
 }
-.pit-stages h3 { font-size: 1.15rem; margin: .3rem 0 .5rem; }
-.pit-stages p { color: var(--track); font-size: .95rem; }
+.pit-stages h3 { margin: 0 0 .5rem; }
+.pit-stages p { color: var(--paper); opacity: .75; }
 
-/* team: three people, one per column from 48rem up; the square tile holds its
-   shape until a photo replaces the initial. */
+/* team: three people on one row that opens. The row is flex, not three fixed
+   columns, so a hovered card can grow and unclip its links while the others
+   give way. Touch has no hover, so the links never hide there. */
 .team-grid {
-display: grid; gap: 1rem;
-grid-template-columns: 1fr;
+display: flex; flex-wrap: wrap; align-items: stretch;
+gap: 1.5rem;
 }
-@media (min-width: 48rem) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
 .team-card {
-background: #fff; border: 1px solid rgba(10, 15, 21, .2); border-radius: 4px;
-padding: 1.5rem; text-align: center; overflow-wrap: anywhere;
+flex: 1 1 15rem; min-width: 0;
+padding: 1.5rem 1.5rem 1.25rem;
+background: rgba(216, 19, 22, .06);
+border-top: 3px solid var(--red);
+transition: flex-grow .45s cubic-bezier(.16, 1, .3, 1),
+            background-color .45s ease;
+overflow-wrap: anywhere;
+}
+.team-card:hover, .team-card:focus-within {
+flex-grow: 1.7;
+background: rgba(216, 19, 22, .12);
 }
 .team-avatar {
 position: relative;
 display: grid; place-items: center;
-width: min(100%, 9rem); margin: 0 auto 1rem;
+width: min(100%, 8rem); margin: 0 0 1.25rem;
 aspect-ratio: 1;
 background: var(--red); color: #fff;
-font-size: 2.5rem; font-weight: 700; line-height: 1;
+font-size: 3rem; font-weight: 700; line-height: 1;
 }
 .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.team-card h3 { font-size: 1.1rem; }
+.team-card h3 { font-size: clamp(1.2rem, 2vw, 1.55rem); }
 /* role, bio, and links are all supporting text under the name */
-.team-card p { color: var(--track); font-size: .95rem; }
-.team-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 1rem; margin-top: .5rem; }
-.team-links a { color: var(--red-deep); font-size: .9rem; font-weight: 600; text-underline-offset: .2em; }
+.team-card p { color: var(--track); }
+.team-role { font-weight: 600; }
+.team-links {
+display: flex; flex-wrap: wrap; gap: 0 1.25rem;
+max-height: 0; overflow: hidden; margin-top: 0; opacity: 0;
+transition: max-height .45s cubic-bezier(.16, 1, .3, 1),
+            opacity .3s ease, margin-top .45s ease;
+}
+.team-card:hover .team-links, .team-card:focus-within .team-links {
+max-height: 4rem; margin-top: .6rem; opacity: 1;
+}
+/* touch has no hover: never hide the links there */
+@media (hover: none) {
+.team-links { max-height: none; margin-top: .35rem; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+.team-card, .team-links { transition: none; }
+}
+.team-links a { color: var(--red-deep); font-size: .95rem; font-weight: 600; text-underline-offset: .2em; }
 .team-links a:hover { text-decoration: underline; }
 
-.contact { text-align: center; padding-bottom: 4rem; }
-.contact p { color: var(--track); margin-bottom: .5rem; }
+/* contact: the finish line. The dark band closes the page, the heading runs at
+   full display size, and the form is the only thing in the section. */
+.contact {
+background: var(--asphalt); color: var(--paper);
+text-align: center; padding: 4.5rem 0 3.5rem;
+color-scheme: dark; caret-color: var(--yellow);
+}
+.contact h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+.contact .wrap > p { opacity: .8; margin-bottom: .5rem; }
 .contact .mail {
 font-size: clamp(1rem, 4.5vw, 1.3rem); font-weight: 700;
-color: var(--red-deep); direction: ltr; unicode-bidi: embed; overflow-wrap: anywhere;
+color: var(--yellow); direction: ltr; unicode-bidi: embed; overflow-wrap: anywhere;
 text-decoration: none;
 }
 .contact .mail:hover { text-decoration: underline; }
+.contact a:focus-visible, .contact button:focus-visible { outline-color: var(--yellow); }
 
 /* the brief form is the primary action; the email below it is the secondary route */
 .brief-form {
 display: grid; gap: 1rem; text-align: start;
-max-width: 34rem; margin: 1.75rem auto;
+max-width: 34rem; margin: 2rem auto;
 }
 @media (min-width: 48rem) { .brief-form { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 47.99rem) { .brief-form .btn { width: 100%; } }
 .field { display: grid; gap: .35rem; }
 .field--wide { grid-column: 1 / -1; }
 .field label { font-size: .9rem; font-weight: 600; }
 .field input, .field select, .field textarea {
-font: inherit; width: 100%; padding: .5rem .7rem;
-color: var(--asphalt); background: #fff;
-border: 1px solid rgba(10, 15, 21, .35); border-radius: 4px;
+font: inherit; width: 100%; padding: .55rem .75rem;
+color: var(--paper); background: rgba(241, 238, 235, .07);
+border: 1px solid rgba(241, 238, 235, .4); border-radius: 4px;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--paper); opacity: .55; }
+/* keep Chrome's autofill from repainting the dark field light blue */
+.field input:-webkit-autofill {
+-webkit-text-fill-color: var(--paper);
+-webkit-box-shadow: 0 0 0 100px var(--asphalt) inset;
 }
 .field textarea { resize: vertical; }
 .field :is(input, select, textarea):focus-visible { outline: 3px solid var(--red-deep); outline-offset: 1px; }
+.contact .field :is(input, select, textarea):focus-visible { outline-color: var(--yellow); outline-offset: 2px; }
 .field input[type="email"] { direction: ltr; }
 .req { color: var(--red); }
-.opt { font-weight: 400; color: var(--track); }
+.opt { font-weight: 400; color: var(--paper); opacity: .7; }
 /* honeypot: in the DOM for bots, out of sight and out of the tab order for people */
 .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .form-status { margin-top: .25rem; font-weight: 600; }
-.form-status[data-state="success"] { color: var(--asphalt); }
-.form-status[data-state="error"] { color: var(--red-deep); }
+.form-status[data-state="success"] { color: var(--paper); }
+.form-status[data-state="error"] { color: var(--yellow); }
 /* the email is the fallback route, so it only appears when sending failed */
 .form-status[data-state="success"] .form-status-mail { display: none; }
 .form-status-mail { color: inherit; margin-inline-start: .3em; direction: ltr; unicode-bidi: embed; overflow-wrap: anywhere; }
