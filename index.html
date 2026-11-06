@@ -120,16 +120,16 @@
     </div>
   </section>
 
-  <!-- A photo replaces the initial span with <img src="…" alt="">; a bio goes in
-       as a plain <p> after .team-role. Neither needs a CSS change.
-       TODO: the Instagram hrefs are placeholders; the real profile URLs are still
+  <!-- TODO: the Instagram hrefs are placeholders; the real profile URLs are still
        to be supplied (same unfinished item as the footer's social links). -->
   <section class="team" id="team">
     <div class="wrap">
       <h2>الفريق</h2>
       <div class="team-grid">
         <article class="team-card">
-          <div class="team-avatar"><span aria-hidden="true">ب</span></div>
+          <div class="team-avatar">
+            <img src="assets/team/bassam.png" alt="بسام العربي">
+          </div>
           <h3>بسام العربي</h3>
           <p class="team-role">مطور ويب</p>
           <p class="team-links">
@@ -138,7 +138,9 @@
           </p>
         </article>
         <article class="team-card">
-          <div class="team-avatar"><span aria-hidden="true">م</span></div>
+          <div class="team-avatar">
+            <img src="assets/team/mohamed.png" alt="محمد طارق">
+          </div>
           <h3>محمد طارق</h3>
           <p class="team-role">متخصص إعلانات</p>
           <p class="team-links">
@@ -146,7 +148,9 @@
           </p>
         </article>
         <article class="team-card">
-          <div class="team-avatar"><span aria-hidden="true">م</span></div>
+          <div class="team-avatar">
+            <img src="assets/team/mahmoud.png" alt="محمود البلتاجي">
+          </div>
           <h3>محمود البلتاجي</h3>
           <p class="team-role">مصمم جرافيك</p>
           <p class="team-links">
@@ -201,7 +205,7 @@
         </div>
 
         <p class="field--wide">
-          <button class="btn" type="submit">ابعت البرِيف <i class="ri-arrow-right-long-fill" aria-hidden="true"></i></button>
+          <button class="btn" type="submit">ابعت البرِيف <i class="ri-arrow-right-line" aria-hidden="true"></i></button>
         </p>
         <!-- Shown by form.js; without JS the form posts to Web3Forms and lands on its own page. -->
         <p class="form-status field--wide" role="status" hidden
@@ -213,6 +217,7 @@
       </form>
       <p>أو ابعتلنا إيميل مباشرة على <a class="mail" href="mailto:pitstop.agency.eg@gmail.com">pitstop.agency.eg@gmail.com</a></p>
     </div>
+    <div class="flag" aria-hidden="true"></div>
   </section>
 </main>
 
