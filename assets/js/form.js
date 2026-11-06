@@ -1,6 +1,3 @@
-// Lane options come from the Lanes section itself, so with JS on the select can't
-// drift from it. The HTML copy below is for the no-JS case only and has to be kept
-// in step by hand. shortcut: no build step, so no single source for both.
 const form = document.querySelector(".brief-form");
 
 if (form) {
@@ -35,7 +32,6 @@ if (form) {
       button.disabled = false;
     }
 
-    // The region is revealed before the text lands so screen readers announce it.
     function show(state, text) {
       status.dataset.state = state;
       status.hidden = false;
