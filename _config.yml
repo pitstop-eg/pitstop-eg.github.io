@@ -1,6 +1,10 @@
+include:
+  - .well-known
 exclude:
   - docs
-  - GLOSSARY.md
   - AGENTS.md
+  - DESIGN.md
+  - GLOSSARY.md
+  - PRODUCT.md
   - README.md
   - .scratch

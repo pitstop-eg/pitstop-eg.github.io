@@ -1,8 +1,3 @@
----
-name: pitstop-site-guide
-description: Guide to PitStop, a digital agency in Egypt — services (web design, branding, Meta ads, video), team, process, and how to submit a project brief.
----
-
 # PitStop Site Guide
 
 PitStop is a digital-presence agency for small and medium local brands in Egypt. Site: https://pitstop-eg.github.io (Arabic) / https://pitstop-eg.github.io/en/ (English).
