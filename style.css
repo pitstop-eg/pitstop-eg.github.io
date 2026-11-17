@@ -176,12 +176,12 @@ animation: contact-flag 3.6s linear infinite;
 }
 @keyframes contact-flag { to { background-position: 28px 0; } }
 @media (prefers-reduced-motion: reduce) {
-.contact .flag, .brief-form .btn, .field input, .field select, .field textarea { animation: none; transition: none; }
+.contact .flag, .brief-form .btn, .field input, .field textarea { animation: none; transition: none; }
 }
 
 /* the brief form is the primary action; the email below it is the secondary route */
 .brief-form {
-display: grid; gap: 1.4rem; text-align: start;
+display: grid; gap: 1.25rem; text-align: start;
 max-width: 860px; margin: 3rem auto 0;
 }
 @media (min-width: 48rem) { .brief-form { grid-template-columns: 1fr 1fr; } }
@@ -189,7 +189,7 @@ max-width: 860px; margin: 3rem auto 0;
 .field { display: grid; gap: .5rem; position: relative; }
 .field--wide { grid-column: 1 / -1; }
 .field label { font-size: .92rem; font-weight: 700; letter-spacing: .02em; }
-.field input, .field select, .field textarea {
+.field input, .field textarea {
 font: inherit; width: 100%; padding: .85rem .9rem;
 color: var(--paper); background: rgba(241, 238, 235, .05);
 border: 0; border-bottom: 2px solid rgba(241, 238, 235, .3); border-radius: 0;
@@ -201,33 +201,33 @@ transition: border-color .46s, background .3s;
 -webkit-text-fill-color: var(--paper);
 -webkit-box-shadow: 0 0 0 100px var(--asphalt) inset;
 }
-.field select { background-color: rgba(241, 238, 235, .05); color: var(--paper); }
-.field select option { background-color: #1f2227; color: #fff; }
-.field select option:first-child { color: var(--paper); }
-/* fallback: full yellow so checked/hover stay readable on a white native list */
-.field select option:checked, .field select option:hover { background-color: var(--yellow); color: #000; }
-/* shortcut: first option is a real value (required stays valid); dimming it would look like a placeholder without breaking validation */
-@supports (appearance: base-select) {
-.field select, .field select::picker(select) { appearance: base-select; }
-.field select::picker-icon { color: var(--paper); }
-.field select::picker(select) {
-background-color: #1a1d22; color: #fff;
-border: 1px solid var(--yellow); border-radius: 0; padding: 0; margin-top: 4px;
+.lane { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; gap: .75rem; }
+.lane legend { font-size: .92rem; font-weight: 700; letter-spacing: .02em; margin: 0 0 .9rem; }
+/* service options as square selectable chips; checked = the signal-yellow fill on asphalt */
+.lane-group { display: flex; flex-wrap: wrap; align-items: stretch; gap: .75rem; }
+.lane-group label { display: inline-flex; align-items: center; padding: .5rem 1.1rem; border: 0; border-radius: 0; background: rgba(241, 238, 235, .07); font-weight: 600; font-size: 1rem; letter-spacing: .01em; cursor: pointer; user-select: none; transition: background .2s, color .2s; }
+.lane-group label:hover { background: rgba(241, 238, 235, .12); color: var(--yellow); }
+.lane-group label:has(input:checked) { background: var(--yellow); color: var(--asphalt); }
+.lane-group label:has(input:focus-visible) { outline: 3px solid var(--yellow); outline-offset: 2px; }
+/* checkboxes are visually hidden but stay keyboard-focusable; the label carries the state */
+.lane-group input[type="checkbox"] {
+position: absolute; opacity: 0; pointer-events: none;
 }
-.field select option { background-color: transparent; border-radius: 0; margin-block: 0; padding: 12px 14px; border-left: 3px solid transparent; transition: background-color .2s ease, color .2s ease; }
-.field select option:checked { background-color: transparent; color: var(--yellow); border-left-color: var(--yellow); }
-.field select option:hover, .field select option:checked:hover { background-color: var(--yellow); color: #000; }
+@media (min-width: 48rem) {
+.lane-group label { flex: 0 1 auto; white-space: nowrap; }
 }
-.field textarea { resize: vertical; }
-.field :is(input, select, textarea):focus { border-bottom-color: var(--yellow); background: rgba(241, 238, 235, .09); }
-.field :is(input, select, textarea):focus-visible { outline: none; border-bottom-color: var(--yellow); }
-.field select:focus, .field select:focus-visible { border-bottom-color: var(--yellow); background-color: #1f2227; }
+@media (max-width: 47.99rem) {
+.lane-group label { flex: 0 0 auto; white-space: nowrap; justify-content: center; padding: .6rem 1.1rem; }
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field :is(input, textarea):focus { border-bottom-color: var(--yellow); background: rgba(241, 238, 235, .09); }
+.field :is(input, textarea):focus-visible { outline: none; border-bottom-color: var(--yellow); }
 .field input[type="email"] { direction: ltr; }
 .brief-form .btn { width: 100%; padding: 1rem; font-size: 1.1rem; font-weight: 800; display: inline-flex; justify-content: center; gap: .6rem;
 transition: transform .42s cubic-bezier(.16,1,.3,1), background .25s; }
 .brief-form .btn:hover { transform: translateY(-2px); }
 .req { color: var(--red); }
-.opt { font-weight: 400; color: var(--paper); opacity: .7; }
+.opt { font-weight: 400; color: var(--paper); opacity: .5; }
 /* honeypot: in the DOM for bots, out of sight and out of the tab order for people */
 .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .form-status { margin-top: .25rem; font-weight: 600; }

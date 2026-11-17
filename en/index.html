@@ -204,30 +204,30 @@
           <input id="phone" name="phone" type="tel" autocomplete="tel" required toolparamdescription="Your phone number so the team can reach you.">
         </div>
         <div class="field">
-          <label for="email">Your email <span class="opt">(optional)</span></label>
-          <input id="email" name="email" type="email" autocomplete="email" toolparamdescription="Your email address (optional).">
-        </div>
-        <div class="field">
           <label for="brand">Brand name <span class="req" aria-hidden="true">*</span></label>
           <input id="brand" name="brand" type="text" autocomplete="organization" required toolparamdescription="Your brand or business name.">
         </div>
         <div class="field">
-          <label for="lane">Service <span class="req" aria-hidden="true">*</span></label>
-          <select id="lane" name="lane" required toolparamdescription="The service you're interested in: Web & Systems, Design, Ads, Video, or Not sure yet.">
-            <option value="Not sure yet" data-other>Not sure yet</option>
-            <option>Web &amp; Systems</option>
-            <option>Design</option>
-            <option>Ads</option>
-            <option>Video</option>
-          </select>
-        </div>
-        <div class="field">
           <label for="budget">Budget <span class="opt">(optional)</span></label>
-          <input id="budget" name="budget" type="text" placeholder="e.g. 10,000 – 15,000 EGP" toolparamdescription="Approximate budget in Egyptian pounds (EGP), e.g. 10,000-15,000. Optional.">
+          <input id="budget" name="budget" type="text" placeholder="10,000 – 15,000 EGP" toolparamdescription="Approximate budget in Egyptian pounds (EGP), e.g. 10,000-15,000. Optional.">
         </div>
         <div class="field field--wide">
+          <label for="email">Your email <span class="opt">(optional)</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" toolparamdescription="Your email address (optional).">
+        </div>
+        <fieldset class="field field--wide lane">
+          <legend>What do you need? (pick one or more) <span class="req" aria-hidden="true">*</span></legend>
+          <div class="lane-group">
+            <label><input type="checkbox" name="lane" value="Web &amp; Systems" toolparamdescription="The service you're interested in: Web & Systems."> Web &amp; Systems</label>
+            <label><input type="checkbox" name="lane" value="Design" toolparamdescription="The service you're interested in: Design."> Design</label>
+            <label><input type="checkbox" name="lane" value="Ads" toolparamdescription="The service you're interested in: Ads."> Ads</label>
+            <label><input type="checkbox" name="lane" value="Video" toolparamdescription="The service you're interested in: Video."> Video</label>
+            <label><input type="checkbox" name="lane" value="Help me choose" toolparamdescription="The service you're interested in: Not sure yet."> Help me choose</label>
+          </div>
+        </fieldset>
+        <div class="field field--wide">
           <label for="message">Your message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="5" required toolparamdescription="Describe your project or idea."></textarea>
+          <textarea id="message" name="message" rows="3" required toolparamdescription="Describe your project or idea."></textarea>
         </div>
 
         <p class="field--wide">

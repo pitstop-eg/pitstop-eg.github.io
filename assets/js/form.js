@@ -1,14 +1,10 @@
 const form = document.querySelector(".brief-form");
 
 if (form) {
-  const select = form.elements.lane;
-  const other = select.querySelector("[data-other]");
-  select.length = 0;
-  select.add(other);
-  for (const heading of document.querySelectorAll(".service h3")) {
-    const lane = heading.textContent.trim();
-    select.add(new Option(lane, lane));
-  }
+  const boxes = [...form.querySelectorAll('input[name="lane"]')];
+  const syncRequired = () => { const any = boxes.some(b => b.checked); boxes.forEach(b => b.required = !any); };
+  boxes.forEach(b => b.addEventListener("change", syncRequired));
+  syncRequired();
 
   const status = form.querySelector(".form-status");
   const button = form.querySelector('[type="submit"]');
@@ -17,14 +13,17 @@ if (form) {
     event.preventDefault();
     button.disabled = true;
     try {
+      const data = Object.fromEntries(new FormData(form));
+      data.lane = boxes.filter((b) => b.checked).map((b) => b.value).join(", ");
       const response = await fetch(form.action, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        body: JSON.stringify(data),
       });
       const result = await response.json();
       if (!result.success) throw new Error(result.message);
       form.reset();
+      syncRequired();
       show("success", status.dataset.success);
     } catch (error) {
       show("error", status.dataset.error);

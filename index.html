@@ -204,30 +204,30 @@
           <input id="phone" name="phone" type="tel" autocomplete="tel" required toolparamdescription="Your phone number so the team can reach you.">
         </div>
         <div class="field">
-          <label for="email">إيميلك <span class="opt">(اختياري)</span></label>
-          <input id="email" name="email" type="email" autocomplete="email" toolparamdescription="Your email address (optional).">
-        </div>
-        <div class="field">
           <label for="brand">اسم البراند <span class="req" aria-hidden="true">*</span></label>
           <input id="brand" name="brand" type="text" autocomplete="organization" required toolparamdescription="Your brand or business name.">
         </div>
         <div class="field">
-          <label for="lane">المجال <span class="req" aria-hidden="true">*</span></label>
-          <select id="lane" name="lane" required toolparamdescription="The service you're interested in: Web & Systems, Design, Ads, Video, or Not sure yet.">
-            <option value="مش متأكد لسه" data-other>مش متأكد لسه</option>
-            <option>ويب وسيستمز</option>
-            <option>ديزاين</option>
-            <option>إعلانات</option>
-            <option>فيديو</option>
-          </select>
-        </div>
-        <div class="field">
           <label for="budget">الميزانية <span class="opt">(اختياري)</span></label>
-          <input id="budget" name="budget" type="text" placeholder="مثال: 10,000 – 15,000 جنيه" toolparamdescription="Approximate budget in Egyptian pounds (EGP), e.g. 10,000-15,000. Optional.">
+          <input id="budget" name="budget" type="text" placeholder="10,000 – 15,000 EGP" toolparamdescription="Approximate budget in Egyptian pounds (EGP), e.g. 10,000-15,000. Optional.">
         </div>
         <div class="field field--wide">
+          <label for="email">إيميلك <span class="opt">(اختياري)</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" toolparamdescription="Your email address (optional).">
+        </div>
+        <fieldset class="field field--wide lane">
+          <legend>محتاج إيه؟ (اختار واحدة أو أكتر) <span class="req" aria-hidden="true">*</span></legend>
+          <div class="lane-group">
+            <label><input type="checkbox" name="lane" value="ويب وسيستمز"> ويب وسيستمز</label>
+            <label><input type="checkbox" name="lane" value="ديزاين"> ديزاين</label>
+            <label><input type="checkbox" name="lane" value="إعلانات"> إعلانات</label>
+            <label><input type="checkbox" name="lane" value="فيديو"> فيديو</label>
+            <label><input type="checkbox" name="lane" value="محتاج ترشيح من الفريق"> محتاج ترشيح من الفريق</label>
+          </div>
+        </fieldset>
+        <div class="field field--wide">
           <label for="message">رسالتك <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="5" required toolparamdescription="Describe your project or idea."></textarea>
+          <textarea id="message" name="message" rows="3" required toolparamdescription="Describe your project or idea."></textarea>
         </div>
 
         <p class="field--wide">
