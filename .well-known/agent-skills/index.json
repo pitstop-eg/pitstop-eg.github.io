@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "pitstop-site-guide",
+      "type": "skill-md",
+      "description": "Guide to PitStop, a digital agency in Egypt — services (web design, branding, Meta ads, video), team, process, and how to submit a project brief.",
+      "url": "https://pitstop-eg.github.io/.well-known/agent-skills/pitstop-site-guide.md",
+      "digest": "sha256:13c82a1e5a75558730751eec91e10bd5e72ef2d3ece760984443a2206ae4aa5b"
+    }
+  ]
+}

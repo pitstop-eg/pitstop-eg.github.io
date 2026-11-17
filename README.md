@@ -23,6 +23,11 @@ Edit the files and push — GitHub Pages serves the repo root as-is.
 python3 -m http.server 8000
 ```
 
+Agent-discovery files need manual upkeep when their sources change:
+
+- `index.md` / `en/index.md` are markdown mirrors of the HTML pages — update them together.
+- `/.well-known/agent-skills/index.json` pins a `sha256` digest of `pitstop-site-guide.md` — recompute with `sha256sum` whenever that file changes.
+
 Both language pages must stay in sync: same structure, same section IDs (`#lanes`, `#pit-stop`, `#team`, `#contact`), so anchors resolve in either language.
 
 ## Repo conventions

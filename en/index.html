@@ -10,6 +10,8 @@
 <link rel="alternate" hreflang="ar" href="https://pitstop-eg.github.io/">
 <link rel="alternate" hreflang="en" href="https://pitstop-eg.github.io/en/">
 <link rel="alternate" hreflang="x-default" href="https://pitstop-eg.github.io/">
+<link rel="alternate" type="text/markdown" href="/en/index.md">
+<link rel="ai-catalog" href="/.well-known/ai-catalog.json">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
@@ -181,7 +183,9 @@
     <div class="wrap">
       <h2>Got a project or an idea?</h2>
       <p>Tell us about it in a few lines and we'll get back to you soon.</p>
-      <form class="brief-form" action="https://api.web3forms.com/submit" method="POST">
+      <form class="brief-form" action="https://api.web3forms.com/submit" method="POST"
+            toolname="submit_project_brief"
+            tooldescription="Submit a project brief to PitStop, a digital agency in Egypt (web design, branding, Meta ads, video). The team replies by phone or email.">
         <input type="hidden" name="access_key" value="1426ef8b-5331-443b-ba0a-645a32db1ad4">
         <input type="hidden" name="subject" value="New brief from the PitStop site (English form)">
         <input type="hidden" name="from_name" value="PitStop">
@@ -192,23 +196,23 @@
 
         <div class="field">
           <label for="name">Your name <span class="req" aria-hidden="true">*</span></label>
-          <input id="name" name="name" type="text" autocomplete="name" required>
+          <input id="name" name="name" type="text" autocomplete="name" required toolparamdescription="Your full name.">
         </div>
         <div class="field">
           <label for="phone">Your phone number <span class="req" aria-hidden="true">*</span></label>
-          <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" required toolparamdescription="Your phone number so the team can reach you.">
         </div>
         <div class="field">
           <label for="email">Your email <span class="opt">(optional)</span></label>
-          <input id="email" name="email" type="email" autocomplete="email">
+          <input id="email" name="email" type="email" autocomplete="email" toolparamdescription="Your email address (optional).">
         </div>
         <div class="field">
           <label for="brand">Brand name <span class="req" aria-hidden="true">*</span></label>
-          <input id="brand" name="brand" type="text" autocomplete="organization" required>
+          <input id="brand" name="brand" type="text" autocomplete="organization" required toolparamdescription="Your brand or business name.">
         </div>
         <div class="field">
           <label for="lane">Service <span class="req" aria-hidden="true">*</span></label>
-          <select id="lane" name="lane" required>
+          <select id="lane" name="lane" required toolparamdescription="The service you're interested in: Web & Systems, Design, Ads, Video, or Not sure yet.">
             <option value="Not sure yet" data-other>Not sure yet</option>
             <option>Web &amp; Systems</option>
             <option>Design</option>
@@ -218,11 +222,11 @@
         </div>
         <div class="field">
           <label for="budget">Budget <span class="opt">(optional)</span></label>
-          <input id="budget" name="budget" type="text" placeholder="e.g. 10,000 – 15,000 EGP">
+          <input id="budget" name="budget" type="text" placeholder="e.g. 10,000 – 15,000 EGP" toolparamdescription="Approximate budget in Egyptian pounds (EGP), e.g. 10,000-15,000. Optional.">
         </div>
         <div class="field field--wide">
           <label for="message">Your message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" rows="5" required></textarea>
+          <textarea id="message" name="message" rows="5" required toolparamdescription="Describe your project or idea."></textarea>
         </div>
 
         <p class="field--wide">

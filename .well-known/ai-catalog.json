@@ -1,0 +1,42 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "PitStop",
+    "identifier": "did:web:pitstop-eg.github.io"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:pitstop-eg.github.io:content:landing-ar",
+      "displayName": "PitStop Landing Page (Arabic)",
+      "type": "text/html",
+      "url": "https://pitstop-eg.github.io/",
+      "representativeQueries": [
+        "PitStop agency Egypt services",
+        "شركة تصميم مواقع في مصر",
+        "Meta ads management for small brands in Egypt"
+      ]
+    },
+    {
+      "identifier": "urn:air:pitstop-eg.github.io:content:landing-en",
+      "displayName": "PitStop Landing Page (English)",
+      "type": "text/html",
+      "url": "https://pitstop-eg.github.io/en/",
+      "representativeQueries": [
+        "web design agency for local brands in Egypt",
+        "branding and visual identity services Egypt",
+        "how does PitStop agency work"
+      ]
+    },
+    {
+      "identifier": "urn:air:pitstop-eg.github.io:content:site-guide-md",
+      "displayName": "PitStop Site Guide for Agents (Markdown)",
+      "type": "text/markdown",
+      "url": "https://pitstop-eg.github.io/.well-known/agent-skills/pitstop-site-guide.md",
+      "representativeQueries": [
+        "how do I submit a project brief to PitStop",
+        "who is in the PitStop team",
+        "contact PitStop agency Egypt"
+      ]
+    }
+  ]
+}
