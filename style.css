@@ -126,69 +126,6 @@ p { text-wrap: pretty; }
 h2 { font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.25; margin-bottom: 2.25rem; }
 h3 { font-size: 1.2rem; line-height: 1.3; }
 
-/* lanes: the four lanes read as one horizontal board — lane number, title, and
-   its services on a single line. All four carry equal weight; nothing is boxed.
-   The cap is a short red stub at rest that runs the full row on hover. */
-.lane-grid { counter-reset: lane; }
-.lane {
-position: relative;
-display: grid;
-grid-template-columns: auto 1fr;
-grid-template-areas: "num title" "num services";
-align-items: baseline; gap: .15rem 1.5rem;
-border-bottom: 1px solid rgba(10, 15, 21, .18);
-padding: 1.4rem 0 1.5rem;
-counter-increment: lane;
-overflow-wrap: anywhere;
-transition: opacity .25s ease;
-}
-.lane::before {
-content: ""; position: absolute; inset-block-start: 0; inset-inline: 0;
-height: 3px; background: var(--red);
-transform: scaleX(.35);
-transform-origin: 0 50%;
-transition: transform .5s cubic-bezier(.16, 1, .3, 1);
-}
-.lane:dir(rtl)::before,
-html[dir="rtl"] .lane::before { transform-origin: 100% 50%; }
-.lane:hover::before,
-.lane:focus-within::before { transform: scaleX(1); }
-/* the hovered lane is the only one at full strength, so the row reads as one
-   lane in focus instead of four equal bars */
-@media (hover: hover) {
-.lane-grid:hover .lane:not(:hover) { opacity: .5; }
-}
-.lane-grid:has(.lane:focus-within) .lane:not(:focus-within) { opacity: .5; }
-.lane h3 {
-grid-area: title;
-font-size: clamp(1.6rem, 3.4vw, 2.4rem);
-margin: 0; letter-spacing: -.015em;
-}
-.lane-services {
-grid-area: services;
-list-style: none; padding: 0;
-display: flex; flex-wrap: wrap; gap: .1rem 1.4rem;
-color: var(--track); font-size: 1rem;
-}
-.lane-services li::before { content: "•"; margin-inline-end: .5rem; color: var(--red); }
-.lane::after {
-content: counter(lane, decimal-leading-zero);
-grid-area: num;
-align-self: start; padding-top: .55rem;
-font-weight: 700; font-size: .85rem; letter-spacing: .12em;
-color: var(--red);
-}
-@media (min-width: 48rem) {
-.lane {
-grid-template-columns: auto minmax(0, 18rem) 1fr;
-grid-template-areas: "num title services";
-align-items: center;
-}
-}
-@media (prefers-reduced-motion: reduce) {
-.lane, .lane::before { transition: none; }
-}
-
 /* pit stop: the one section that plays the metaphor literally, so it takes the
    asphalt surface. Four numbered stations read as a sequence; the number is the
    loudest element and the rules stop the columns from becoming cards again. */
@@ -213,60 +150,6 @@ letter-spacing: .02em; color: var(--red); margin-bottom: .6rem;
 }
 .pit-stages h3 { margin: 0 0 .5rem; }
 .pit-stages p { color: var(--paper); opacity: .75; }
-
-/* team: three people on one row that opens. The row is flex, not three fixed
-   columns, so a hovered card can grow and unclip its links while the others
-   give way. Touch has no hover, so the links never hide there. */
-.team-grid {
-display: flex; flex-wrap: wrap; align-items: stretch;
-gap: 1.5rem;
-}
-.team-card {
-flex: 1 1 15rem; min-width: 0;
-padding: 1.5rem 1.5rem 1.25rem;
-background: rgba(216, 19, 22, .06);
-border-top: 3px solid var(--red);
-transition: flex-grow .45s cubic-bezier(.16, 1, .3, 1),
-            background-color .45s ease;
-overflow-wrap: anywhere;
-}
-.team-card:hover, .team-card:focus-within {
-flex-grow: 1.7;
-background: rgba(216, 19, 22, .12);
-}
-.team-avatar {
-position: relative;
-display: grid; place-items: center;
-width: min(100%, 8rem); margin: 0 0 1.25rem;
-aspect-ratio: 1;
-background: var(--red); color: #fff;
-font-size: 3rem; font-weight: 700; line-height: 1;
-}
-.team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.team-card h3 { font-size: clamp(1.2rem, 2vw, 1.55rem); }
-/* role, bio, and links are all supporting text under the name */
-.team-card p { color: var(--track); }
-.team-role { font-weight: 600; }
-.team-links {
-display: flex; flex-wrap: wrap; gap: 0 1.25rem;
-max-height: 0; overflow: hidden; margin-top: 0; opacity: 0;
-transition: max-height .45s cubic-bezier(.16, 1, .3, 1),
-            opacity .3s ease, margin-top .45s ease;
-}
-.team-card:hover .team-links, .team-card:focus-within .team-links {
-max-height: 4rem; margin-top: .6rem; opacity: 1;
-}
-/* touch has no hover: never hide the links there */
-@media (hover: none) {
-.team-links { max-height: none; margin-top: .35rem; opacity: 1; }
-}
-@media (prefers-reduced-motion: reduce) {
-.team-card, .team-links { transition: none; }
-}
-/* inline-block icon is an atomic inline: the hover underline skips it */
-.team-links a { display: inline-block; min-height: 44px; color: var(--red-deep); font-size: 1rem; font-weight: 600; }
-.team-links a i { display: inline-block; margin-inline-end: .45rem; font-size: 1.15em; line-height: 1; vertical-align: -.125em; font-style: normal; }
-.team-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
 
 /* contact: the finish line (Flight overdrive v3, speed 0.4 baked). Centered display,
    underline fields with yellow focus, full-width morphing submit, moving flag. */
@@ -362,3 +245,150 @@ transition: transform .42s cubic-bezier(.16,1,.3,1), background .25s; }
 .social a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: 1.75rem; line-height: 1; }
 .site-footer a:focus-visible { outline-color: var(--yellow); }
 .copyright { font-size: .85rem; opacity: .8; }
+
+/* Services accordion (Arabic and English services sections). */
+.services .acc { interpolate-size: allow-keywords; }
+.services .acc details { border-bottom: 1px solid rgba(10, 15, 21, .18); }
+.services .acc summary {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.4rem .25rem;
+  cursor: pointer;
+  list-style: none;
+}
+.services .acc summary::-webkit-details-marker { display: none; }
+.services .acc summary::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: -1px;
+  width: 100%;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+}
+.services .acc summary:dir(rtl)::before,
+html[dir="rtl"] .services .acc summary::before { transform-origin: 100% 50%; }
+.services .acc details[open] summary::before { transform: scaleX(1); }
+.services .acc summary:focus-visible {
+  outline: 3px solid var(--red-deep);
+  outline-offset: -3px;
+}
+.services .acc .num {
+  color: var(--red);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: .12em;
+  min-width: 2.6rem;
+  flex: none;
+}
+.services .acc h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+.services .acc details:not([open]) h3 { opacity: .5; }
+.services .acc details:not([open]):hover h3 { opacity: .85; }
+.services .acc .chev {
+  margin-inline-start: auto;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+}
+.services .acc details[open] .chev { transform: rotate(45deg); }
+.services .acc details::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height .35s ease, content-visibility .35s allow-discrete;
+}
+.services .acc details[open]::details-content { height: auto; }
+.services .acc .panel {
+  display: grid;
+  gap: 1.1rem;
+  padding: .25rem .25rem 1.7rem;
+  padding-inline-start: 3.85rem;
+}
+.services .acc .panel p {
+  margin: 0;
+  color: var(--track);
+  line-height: 1.8;
+  max-width: 52ch;
+}
+.services .acc .panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 2.2rem;
+}
+.services .acc .panel li {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--asphalt);
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+.services .acc .panel li::before {
+  content: "";
+  width: .58rem;
+  height: .58rem;
+  flex: none;
+  background: conic-gradient(var(--red) 0 25%, transparent 0 50%, var(--red) 0 75%, transparent 0);
+}
+
+/* Team cards: photo-first, grayscale→color reveal. */
+.team .crew { display: grid; gap: 1.5rem; }
+.team .member {
+  background: rgba(216, 19, 16, .06);
+  transition: background-color .3s ease;
+}
+.team .member:hover,
+.team .member:focus-within { background: rgba(216, 19, 16, .12); }
+.team .photo {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+}
+.team .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(.85);
+  transition: filter .45s ease, transform .45s cubic-bezier(.2, .7, .2, 1);
+}
+.team .member:hover .photo img,
+.team .member:focus-within .photo img { filter: grayscale(0); transform: scale(1.04); }
+.team .crew h3 {
+  margin: 1.1rem 1.25rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+.team .role {
+  margin: .2rem 1.25rem 1.2rem;
+  color: var(--track);
+  line-height: 1.8;
+}
+.team .links {
+  margin: 0 1.25rem 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.4rem;
+}
+.team .links a { font-weight: 600; color: var(--asphalt); text-decoration: none; transition: color .2s ease; }
+.team .links a:hover { color: var(--red-deep); }
+.team .links a:focus-visible { outline: 3px solid var(--red-deep); outline-offset: 2px; }
+@media (min-width: 48rem) {
+  .team .crew { grid-template-columns: repeat(3, 1fr); }
+}

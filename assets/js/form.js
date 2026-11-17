@@ -5,7 +5,7 @@ if (form) {
   const other = select.querySelector("[data-other]");
   select.length = 0;
   select.add(other);
-  for (const heading of document.querySelectorAll(".lane h3")) {
+  for (const heading of document.querySelectorAll(".service h3")) {
     const lane = heading.textContent.trim();
     select.add(new Option(lane, lane));
   }
