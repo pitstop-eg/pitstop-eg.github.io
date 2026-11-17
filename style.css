@@ -263,8 +263,10 @@ max-height: 4rem; margin-top: .6rem; opacity: 1;
 @media (prefers-reduced-motion: reduce) {
 .team-card, .team-links { transition: none; }
 }
-.team-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; color: var(--red-deep); font-size: .95rem; font-weight: 600; text-underline-offset: .2em; }
-.team-links a:hover { text-decoration: underline; }
+/* inline-block icon is an atomic inline: the hover underline skips it */
+.team-links a { display: inline-block; min-height: 44px; color: var(--red-deep); font-size: 1rem; font-weight: 600; }
+.team-links a i { display: inline-block; margin-inline-end: .45rem; font-size: 1.15em; line-height: 1; vertical-align: -.125em; font-style: normal; }
+.team-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
 
 /* contact: the finish line (Flight overdrive v3, speed 0.4 baked). Centered display,
    underline fields with yellow focus, full-width morphing submit, moving flag. */
