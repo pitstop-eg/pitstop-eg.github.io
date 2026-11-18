@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PitStop | الصفحة مش موجودة (404)</title>
+<meta name="description" content="الصفحة اللي بتدور عليها مش موجودة. ارجع للصفحة الرئيسية.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A0F15">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4/fonts/remixicon.css">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" data-en-href="/en/">
+      <img src="/assets/logo-white.png" alt="PitStop" width="78" height="28">
+    </a>
+    <div class="header-end">
+      <a class="lang-switch" href="/en/" lang="en" hreflang="en"
+         data-en-href="/" data-en-lang="ar" data-en-hreflang="ar"><span data-en="العربية">EN</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="error">
+    <div class="wrap">
+      <span class="error-sign" aria-hidden="true">404</span>
+      <div class="error-body">
+        <h1><span data-en="This page isn't on the track">الصفحة دي مش على المضمار</span></h1>
+        <p class="lede"><span data-en="The link may be old, or there's a typo in it. No problem — head back to the start and pick up from there.">الرابط غالبًا قديم أو فيه حرف غلط. ولا يهمك، ارجع للصفحة الرئيسية وكمّل من هناك.</span></p>
+        <div class="error-actions">
+          <a class="btn" href="/" data-en-href="/en/"><span data-en="Back to the homepage">ارجع للصفحة الرئيسية</span> <i class="ri-arrow-right-line" aria-hidden="true"></i></a>
+          <a class="quiet" href="mailto:pitstop.agency.eg@gmail.com"><span data-en="or email us">أو ابعتلنا إيميل</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="flag" aria-hidden="true"></div>
+  </section>
+</main>
+
+<script>
+(function () {
+  if (!/^\/en(\/|$)/.test(location.pathname)) return;
+  document.documentElement.lang = 'en';
+  document.documentElement.dir = 'ltr';
+  document.title = 'PitStop | Page not found (404)';
+  document.querySelectorAll('[data-en]').forEach(function (el) { el.textContent = el.dataset.en; });
+  document.querySelectorAll('[data-en-href]').forEach(function (el) { el.setAttribute('href', el.dataset.enHref); });
+  document.querySelectorAll('[data-en-lang]').forEach(function (el) { el.setAttribute('lang', el.dataset.enLang); });
+  document.querySelectorAll('[data-en-hreflang]').forEach(function (el) { el.setAttribute('hreflang', el.dataset.enHreflang); });
+})();
+</script>
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "30e80babef8b42ae81f77499024b2209"}'></script>
+</body>
+</html>

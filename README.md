@@ -4,6 +4,7 @@ Static, bilingual landing page for **PitStop**, a digital-presence agency for lo
 
 - `/` — Arabic (`index.html`)
 - `/en/` — English (`en/index.html`)
+- `/404.html` — custom 404, Arabic by default; a small script shows the English copy on `/en/` paths
 
 ## Stack
 
