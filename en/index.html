@@ -256,10 +256,17 @@
       <a href="https://www.instagram.com/pitstop.agency.eg/" target="_blank" rel="noopener noreferrer" aria-label="PitStop on Instagram"><i class="ri-instagram-line" aria-hidden="true"></i></a>
       <a href="https://www.tiktok.com/@pitstopeg" target="_blank" rel="noopener noreferrer" aria-label="PitStop on TikTok"><i class="ri-tiktok-fill" aria-hidden="true"></i></a>
     </nav>
-    <p class="copyright">© 2026 PitStop. All rights reserved.</p>
+    <p class="copyright">© <span id="year">2026</span> PitStop. All rights reserved.</p>
   </div>
 </footer>
 
+<script>
+
+  // Copyright year auto-update
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+
+</script>
 <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "30e80babef8b42ae81f77499024b2209"}'></script>
 <script src="../assets/js/form.js"></script>
 <script src="../assets/js/menu.js"></script>
